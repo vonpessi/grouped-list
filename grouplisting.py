@@ -8,9 +8,14 @@ import pickle
 quitProgram = False
 
 
+# SIGINIT handler
 def signalHandler(sig, frame):
     print('You pressed Ctrl+C')
     sys.exit(0)
+
+
+def timer():
+    return str(time.time() - startingTime)
 
 
 signal.signal(signal.SIGINT, signalHandler)
@@ -22,83 +27,46 @@ def errorMessage():
     return
 
 
-class directoryGroup(threading.Thread):
+class grouping(threading.Thread):
 
-    def __init__(self):
-        super(directoryGroup, self).__init__()
+    def __init__(self, regEx, name):
+        super(grouping, self).__init__()
         self.filename = open(sys.argv[1], 'r')
+        self.regEx = regEx
+        self.name = name
 
     def run(self):
         if self.filename.mode == 'r':
 
+            # find regular expressions from the file
             urlAndDirectory = re.findall(
-                '([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/)',
+                self.regEx,
                 self.filename.read())
             self.filename.close()
 
-            pickle_out = open('data/directory.pickle', 'wb')
-            pickle.dump(urlAndDirectory, pickle_out)
-            pickle_out.close()
-            print("saved in data/directory.pickle file")
+            # Opens pickle file and store the data
+            pickle_out = open('data/' +
+                              self.name +
+                              '.pickle', 'wb')
 
+            pickle.dump(urlAndDirectory,
+                        pickle_out)
+
+            # Closing pickle file.
+            pickle_out.close()
+            print('saved in data/' +
+                  self.name +
+                  '.pickle file ' +
+                  'in ' +
+                  timer() +
+                  ' seconds')
+
+        # handling errors
         else:
             self.filename.close()
             errorMessage()
 
-    def __exit__(self):
-        self.filename.opened_file.close()
-
-
-class filenameGroup(threading.Thread):
-
-    def __init__(self):
-        super(filenameGroup, self).__init__()
-        self.filename = open(sys.argv[1], 'r')
-
-    def run(self):
-        if self.filename.mode == 'r':
-
-            urlDirectoryFilename = re.findall(
-                '([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/+[a-z]+.+[a-z])',
-                self.filename.read())
-            self.filename.close()
-
-            pickle_out = open('data/filename.pickle', 'wb')
-            pickle.dump(urlDirectoryFilename, pickle_out)
-            pickle_out.close()
-            print("saved in data/filename.pickle file")
-
-        else:
-            self.filename.close()
-            errorMessage()
-
-    def __exit__(self):
-        self.filename.opened_file.close()
-
-
-class queriesGroup(threading.Thread):
-
-    def __init__(self):
-        super(queriesGroup, self).__init__()
-        self.filename = open(sys.argv[1], 'r')
-
-    def run(self):
-
-        if self.filename.mode == 'r':
-            queryString = re.findall(
-                '([a-z]+.+[a-z]+.[a-z]+/+\?.*)',
-                self.filename.read())
-            self.filename.close()
-
-            pickle_out = open('data/queries.pickle', 'wb')
-            pickle.dump(queryString, pickle_out)
-            pickle_out.close()
-            print("saved in data/queries.pickle file")
-
-        else:
-            self.filename.close()
-            errorMessage()
-
+    # close file properly if any disruption
     def __exit__(self):
         self.filename.opened_file.close()
 
@@ -107,18 +75,21 @@ while True:
 
     startingTime = time.time()
 
-    directoryT = directoryGroup()
-    filenameT = filenameGroup()
-    queriesT = queriesGroup()
+    # Start threads, define regular expression and filename where, all the data must be store.
+    directoryT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/)', 'directory')
+    fileNameT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/+[a-z]+.+[a-z])', 'filename')
+    queriesT = grouping('([a-z]+.+[a-z]+.[a-z]+/+\?.*)', 'queries')
 
     directoryT.start()
-    filenameT.start()
+    fileNameT.start()
     queriesT.start()
 
-    print("finished in " +
-          str(time.time() - startingTime) +
-          " seconds")
+    # Wtait till all the threads are finished then pause a program. In this case every 15 seconds.
+    directoryT.join()
+    fileNameT.join()
+    queriesT.join()
 
+    print("next check is after 15 second")
     time.sleep(15)
 
     if quitProgram:
