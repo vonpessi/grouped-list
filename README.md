@@ -29,7 +29,7 @@ This script should group URLs in 3 precongfigured groups and save it to data fol
 
 for example:
 ```
-Folder
+Directory
   http://www.example.com/basket/
 Filename
   http://www.example.com/bomb/basket.php
