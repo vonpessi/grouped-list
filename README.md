@@ -1,5 +1,5 @@
 # grouped-list
-grouped-list is a simple example where I practised a grouping URLs with Python.
+grouped-list is a simple project where I practised a grouping URLs with Python.
 ## Getting started
 Clone or download this repository
 ```
