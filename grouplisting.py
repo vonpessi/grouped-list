@@ -83,7 +83,7 @@ while True:
         # Start threads, define regular expression and filename where, all the data must be store.
         directoryT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/)', 'directory')
         fileNameT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/+[a-z]+.+[a-z])', 'filename')
-        queriesT = grouping('([a-z]+.+[a-z]+.[a-z]+/+\?.*)', 'queries')
+        queriesT = grouping('([a-z]+.+[a-z]+.[a-z]+\/+([a-z]+\?.*|\?.*))', 'queries')
 
         directoryT.start()
         fileNameT.start()
