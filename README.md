@@ -14,6 +14,7 @@ In this example I used a https://www.randomlists.com/ website to generate 100 ra
 ### How to use
 Open your terminal and go to the grouped-list folder.
 run python script as usual but use some list of URL's as an argument.
+
 For example:
 ```
 python3 grouplisting.py <Here some list of URLS's>
