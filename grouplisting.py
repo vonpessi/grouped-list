@@ -89,7 +89,7 @@ while True:
         fileNameT.start()
         queriesT.start()
 
-        # Wtait till all the threads are finished then pause a program. In this case every 15 seconds.
+        # Wait till all the threads are finished then pause a program. In this case every 15 seconds.
         directoryT.join()
         fileNameT.join()
         queriesT.join()
