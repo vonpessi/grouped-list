@@ -28,12 +28,17 @@ python3 grouplisting.py example_list_of_urls.txt
 This script should group URLs in 3 precongfigured groups and save it to data folder.
 
 for example:
-```
+
 Directory
+```
   http://www.example.com/basket/
+  ```
 Filename
+```
   http://www.example.com/bomb/basket.php
+  ```
 Query
+```
   https://boot.example.net/authority?basketball=airplane
 ```
 At the moment regular expressions doesn't work perfectly.
