@@ -1,3 +1,2 @@
-data/directory.pickle
-data/filename.pickle
-data/queries.pickle
+#Ignore folder named 'data'
+data/
