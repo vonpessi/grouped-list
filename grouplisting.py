@@ -73,27 +73,32 @@ class grouping(threading.Thread):
 
 while True:
 
-    startingTime = time.time()
+    if len(sys.argv) <= 1:
+        print('There is no argument after Python script.\n'
+              'type \"python3 grouplisting.py there_some_file.txt\"')
+        exit(1)
+    else:
+        startingTime = time.time()
 
-    # Start threads, define regular expression and filename where, all the data must be store.
-    directoryT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/)', 'directory')
-    fileNameT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/+[a-z]+.+[a-z])', 'filename')
-    queriesT = grouping('([a-z]+.+[a-z]+.[a-z]+/+\?.*)', 'queries')
+        # Start threads, define regular expression and filename where, all the data must be store.
+        directoryT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/)', 'directory')
+        fileNameT = grouping('([a-z]+.+[a-z]+.[a-z]+/+[a-z]+/+[a-z]+.+[a-z])', 'filename')
+        queriesT = grouping('([a-z]+.+[a-z]+.[a-z]+/+\?.*)', 'queries')
 
-    directoryT.start()
-    fileNameT.start()
-    queriesT.start()
+        directoryT.start()
+        fileNameT.start()
+        queriesT.start()
 
-    # Wtait till all the threads are finished then pause a program. In this case every 15 seconds.
-    directoryT.join()
-    fileNameT.join()
-    queriesT.join()
+        # Wtait till all the threads are finished then pause a program. In this case every 15 seconds.
+        directoryT.join()
+        fileNameT.join()
+        queriesT.join()
 
-    print("next check is after 15 second")
-    time.sleep(15)
+        print("next check is after 15 second")
+        time.sleep(15)
 
-    if quitProgram:
-        print("Process ended")
-        break
+        if quitProgram:
+            print("Process ended")
+            break
 
 print("exit")
