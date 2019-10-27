@@ -18,8 +18,8 @@ This is an example of my regex.csv file. First column indicate a regular express
 b.*ket,basket
 com,com
 e.*ple,   < ------------- This one is without a name but there must be a comma after regular expression.
-net,netti
-af.*on,someNiceColumnName
+net,net
+af.*on,esimerkkiColumnName
 ```
 If the name of that regular expression are not set like in third row```e.*ple,   ```. It's going to use a regular expression itself as a name.
 
@@ -62,7 +62,7 @@ net,net
 af.*on,esimerkki
 ```
 
-|Date|Url|basket|com|e.*ple|netti|esimerkki|
+|Date|Url|basket|com|e.*ple|net|esimerkki|
 |---|---|---|---|---|---|---|
 |2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
 
