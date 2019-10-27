@@ -46,6 +46,7 @@ python3 grouplisting.py example_list_of_urls.txt regex.csv data/grouptest.csv
 ## How it works
 This script check every url line by line. On each url, script going through whole regular expression list and if regEx match the url then it gives a boolean True value.
 for example:
+
 |Date|Url|basket|com|e.*ple|netti|esimerkki|
 |---|---|---|---|---|---|---|
 |2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
