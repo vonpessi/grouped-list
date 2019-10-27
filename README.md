@@ -58,7 +58,7 @@ b.*ket,basket
 com,com
 e.*ple,  
 expression.
-net,netti
+net,net
 af.*on,esimerkki
 ```
 
