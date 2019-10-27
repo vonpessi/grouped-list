@@ -65,9 +65,3 @@ af.*on,esimerkki
 |Date|Url|basket|com|e.*ple|net|esimerkki|
 |---|---|---|---|---|---|---|
 |2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
-
-This script use a booregular expression list and if regEx match the url then it gives a boolean True value. for example:value and save all of the data to .csv file.
-
-for example:
-regular expression list and if regEx match the url then it gives a boolean True value. for example:value and save all of the data to .csv file.
-
