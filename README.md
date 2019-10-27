@@ -21,16 +21,9 @@ e.*ple,   < ------------- This one is without a name but there must be a comma a
 net,netti
 af.*on,someNiceColumnName
 ```
-If the name of that regular expression are not set like in third row```e.*ple,   ```. It's going to use a regular expression itself as a name. You can see that in step 3.
+If the name of that regular expression are not set like in third row```e.*ple,   ```. It's going to use a regular expression itself as a name.
 
-#### 3. Empty csv file for the saved data.
-
-|Date|Url|basket|com|e.*ple|netti|esimerkki|
-|---|---|---|---|---|---|---|
-|2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
-
-This script use a boolean value to indicate a match of a regular expression.
-
+#### 3. Empty csv file for the data.
 
 ### How to use
 Open your terminal and go to the grouped-list folder.
@@ -50,22 +43,13 @@ In my case:
 ```
 python3 grouplisting.py example_list_of_urls.txt regex.csv data/grouptest.csv
 ```
-![alt text](https://github.com/vonpessi/grouped-list/blob/master/screenshot.png)
 ## How it works
-This script should group URLs in 3 precongfigured groups and save it to data folder.
+This script check every url line by line. On each url, script going through whole regular expression list and if regEx match the url then it gives a boolean True value.
+for example:
+|Date|Url|basket|com|e.*ple|netti|esimerkki|
+|---|---|---|---|---|---|---|
+|2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
+
+This script use a boolean value to indicate a match of a regular expression.
 
 for example:
-
-Directory
-```
-  http://www.example.com/basket/
-  ```
-Filename
-```
-  http://www.example.com/bomb/basket.php
-  ```
-Query
-```
-  https://boot.example.net/authority?basketball=airplane
-```
-At the moment regular expressions doesn't work perfectly.
