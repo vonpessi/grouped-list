@@ -62,6 +62,9 @@ net,net
 af.*on,esimerkki
 ```
 
+There is a two first rows of this data/grouptest.csv file.
+
 |Date|Url|basket|com|e.*ple|net|esimerkki|
 |---|---|---|---|---|---|---|
 |2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
+
