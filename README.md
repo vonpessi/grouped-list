@@ -6,7 +6,7 @@ Clone or download this repository
 git clone https://github.com/vonpessi/grouped-list.git
 ```
 ### Prerequisites
-For testing purpose all the necessary files comes with this repository.
+All the necessary files comes with this repository for testing purpose.
 #### 1. List of URLs. 
 
 In this example I used a https://www.randomlists.com/ website to generate 100 random URLs and saved these on example_list_of_urls.txt. (example_list_of_urls.txt comes with this repository)
