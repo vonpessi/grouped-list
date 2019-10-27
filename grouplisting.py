@@ -35,11 +35,11 @@ class grouping(threading.Thread):
             for url in urlsFile:
                 newRow = [timeStamp, url.replace(' ', '').replace('\n', '')]
 
-                t = threading.Thread(target=makeNewRow, args=(url, newRow))
+                t = threading.Thread(target=checkRegExFromUrl, args=(url, newRow))
                 t.start()
 
 
-def makeNewRow(url, newRow):
+def checkRegExFromUrl(url, newRow):
     # open regex file and csv.reader
     with open(sys.argv[2], 'r') as regExFile:
         csv_reader = csv.reader(regExFile)
@@ -87,7 +87,7 @@ def writeHeader():
 while True:
 
     if len(sys.argv) <= 3:
-        print('\nThere must be three argument after Python script.\n\n'
+        print('\nThere must be a three argument after Python script.\n\n'
               '$1 = list_of_urls\n'
               '$2 = list_of_regular_expressions\n'
               '$3 = csv_file_where_to_store_data\n\n'
