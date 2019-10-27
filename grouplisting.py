@@ -35,23 +35,28 @@ class grouping(threading.Thread):
             for url in urlsFile:
                 newRow = [timeStamp, url.replace(' ', '').replace('\n', '')]
 
-                # open regex file and csv.reader
-                with open(sys.argv[2], 'r') as regExFile:
-                    csv_reader = csv.reader(regExFile)
-                    for regEx in csv_reader:
-                        reCompiledRegEx = re.compile(regEx[0])
+                t = threading.Thread(target=makeNewRow, args=(url, newRow))
+                t.start()
 
-                        # check if the regex match  the url and gives boolean
-                        match = re.search(reCompiledRegEx, url)
-                        if match:
-                            newRow.append(True)
-                        else:
-                            newRow.append(False)
 
-                # write new row to the csv file
-                with open(sys.argv[3], 'a') as f:
-                    writer = csv.writer(f)
-                    writer.writerow(newRow)
+def makeNewRow(url, newRow):
+    # open regex file and csv.reader
+    with open(sys.argv[2], 'r') as regExFile:
+        csv_reader = csv.reader(regExFile)
+        for regEx in csv_reader:
+            reCompiledRegEx = re.compile(regEx[0])
+
+            # check if the regex match  the url and gives boolean
+            match = re.search(reCompiledRegEx, url)
+            if match:
+                newRow.append(True)
+            else:
+                newRow.append(False)
+
+    # write new row to the csv file
+    with open(sys.argv[3], 'a') as f:
+        writer = csv.writer(f)
+        writer.writerow(newRow)
 
 
 def writeHeader():
@@ -107,4 +112,4 @@ while True:
             print('Process ended')
             break
 
-print("exit")
+print('exit')
