@@ -44,7 +44,7 @@ For testing run:
 python3 grouplisting.py example_list_of_urls.txt regex.csv data/grouptest.csv
 ```
 ## How it works
-This script check every url line by line. On each url, script going through whole regular expression list and if regEx match the url then it gives a boolean True value and save all of the data to .csv file.
+This script check url list line by line. On each url, script going through whole regular expression list and if regEx match the url then it gives a boolean True value and save all of the data to .csv file.
 
 for example:
 
