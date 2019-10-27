@@ -6,7 +6,7 @@ Clone or download this repository
 git clone https://github.com/vonpessi/grouped-list.git
 ```
 ### Prerequisites
-
+For testing purpose all the necessary files comes with this repository.
 #### 1. List of URLs. 
 
 In this example I used a https://www.randomlists.com/ website to generate 100 random URLs and saved these on example_list_of_urls.txt. (example_list_of_urls.txt comes with this repository)
@@ -31,7 +31,7 @@ run python script as usual but you need to add three argument.
 
 Order of arguments and explanations:
 ```
-file1 = List of URLs
+file1 = List of URLs for example .txt file
 file2 = csv file of regular expressions and names
 file3 = csv file where you you want to store the data
 ```
@@ -39,18 +39,35 @@ For example:
 ```
 python3 grouplisting.py file1 file2 file3
 ```
-In my case:
+For testing run:
 ```
 python3 grouplisting.py example_list_of_urls.txt regex.csv data/grouptest.csv
 ```
 ## How it works
-This script check every url line by line. On each url, script going through whole regular expression list and if regEx match the url then it gives a boolean True value.
+This script check every url line by line. On each url, script going through whole regular expression list and if regEx match the url then it gives a boolean True value and save all of the data to .csv file.
+
 for example:
+
+From this URL:
+```
+https://www.example.com/?action=branch&attack=animal
+```
+and these regular expressions and names(check prerequisites step 2.):
+```
+b.*ket,basket
+com,com
+e.*ple,  
+expression.
+net,netti
+af.*on,esimerkki
+```
 
 |Date|Url|basket|com|e.*ple|netti|esimerkki|
 |---|---|---|---|---|---|---|
 |2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
 
-This script use a boolean value to indicate a match of a regular expression.
+This script use a booregular expression list and if regEx match the url then it gives a boolean True value. for example:value and save all of the data to .csv file.
 
 for example:
+regular expression list and if regEx match the url then it gives a boolean True value. for example:value and save all of the data to .csv file.
+
