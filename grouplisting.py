@@ -20,53 +20,51 @@ signal.signal(signal.SIGINT, signalHandler)
 x = 1
 
 
-def errorMessage():
-    print("can not open the file")
-    return
-
-
 class grouping(threading.Thread):
 
     def __init__(self):
+
         super(grouping, self).__init__()
 
     def run(self):
-        timeStamp = datetime.datetime.now()
-        with open(sys.argv[1], 'r') as urlsFile:
 
+        timeStamp = datetime.datetime.now()
+
+        # open url file and check each line of urls and remove unnecessary spaces
+        with open(sys.argv[1], 'r') as urlsFile:
             for url in urlsFile:
                 newRow = [timeStamp, url.replace(' ', '').replace('\n', '')]
+
+                # open regex file and csv.reader
                 with open(sys.argv[2], 'r') as regExFile:
+                    csv_reader = csv.reader(regExFile)
+                    for regEx in csv_reader:
+                        reCompiledRegEx = re.compile(regEx[0])
 
-                    for regEx in regExFile:
-                        regEx = regEx.replace('\n', '')
-                        reCompiledRegEx = re.compile(regEx)
-
+                        # check if the regex match  the url and gives boolean
                         match = re.search(reCompiledRegEx, url)
                         if match:
                             newRow.append(True)
                         else:
                             newRow.append(False)
 
+                # write new row to the csv file
                 with open(sys.argv[3], 'a') as f:
                     writer = csv.writer(f)
                     writer.writerow(newRow)
 
-        # Close file properly if any disruption
-
-        def __exit__(self, exc_type, exc_value, traceback):
-            for file in self.files:
-                os.unlink(file)
-
 
 def writeHeader():
+
     if os.path.exists(sys.argv[3]):
         return
     else:
-
+        # write date and Url to the header
         csvFile = open(sys.argv[3], 'w')
         headerNameList = ['Date', 'Url']
 
+        # opens regex file and check if there is a name for that
+        # regular expression and write it to the header
         with open(sys.argv[2], 'r') as headerNames:
             csv_reader = csv.reader(headerNames)
             for headerName in csv_reader:
@@ -101,11 +99,12 @@ while True:
         # Wait till all the threads are finished then pause a program. In this case every 15 seconds.
         groupingThread.join()
 
-        print("next check is after 15 second")
+        print('next check is after 15 second\n'
+              'you can cancel operation for pressing Ctrl + C')
         time.sleep(15)
 
         if quitProgram:
-            print("Process ended")
+            print('Process ended')
             break
 
 print("exit")
