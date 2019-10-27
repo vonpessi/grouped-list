@@ -92,7 +92,7 @@ while True:
               '$2 = list_of_regular_expressions\n'
               '$3 = csv_file_where_to_store_data\n\n'
               'for example\n\n'
-              'python3 grouplisting.py urls.csv regexes.csv grouped_lists.csv\n')
+              'python3 grouplisting.py example_list_of_urls.txt regex.csv data/grouptest.csv\n')
         exit(1)
     else:
 
