@@ -20,7 +20,7 @@ and saved these on example_list_of_urls.txt. (example_list_of_urls.txt comes wit
 
 This is an example of my regex.csv file. First column indicate a regular expression pattern and second column indicate a name of that regular expression. for example in first row ```b.*ket,basket```where ```b.*ket``` is regular expression and ```basket``` is a name.
 ```
-
+`b.*ket,basket
 vonpessi,pessi
 branch,branch
 e.*ple,< ------------- This one is without a name but there must be a comma after regular expression.
