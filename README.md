@@ -67,7 +67,7 @@ systeemi,netti
 af.*on,esimerkki
 ```
 
-There is a two first rows of this data/grouptest.csv file.
+There is a two first rows of this data/grouptest.csv file. It shows if a website include that specific regular expression.
 
 |Date|Url|pessi|branch|e.*ple|netti|esimerkki|
 |---|---|---|---|---|---|---|
