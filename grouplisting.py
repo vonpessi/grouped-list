@@ -61,29 +61,33 @@ class checkUrlList(threading.Thread):
 
 
 def checkRegExFromUrl(urlText, newRow):
+
     if os.path.exists(sys.argv[2]):
 
         # open regex file and csv.reader
         with open(sys.argv[2], 'r') as regExFile:
             csv_reader = csv.reader(regExFile)
-            for regEx in csv_reader:
-                reCompiledRegEx = re.compile(regEx[0])
 
-                # check if the regex match  the url and gives boolean
+            for regEx in csv_reader:
+
+                # check if the regex match the url and gives boolean
                 match = re.findall(regEx[0], urlText)
                 if match:
                     newRow.append(True)
                 else:
                     newRow.append(False)
 
-        # write new row to the csv file
-        with open(sys.argv[3], 'a') as f:
-            writer = csv.writer(f)
-            writer.writerow(newRow)
+        writeNewRowToCsv(newRow)
 
     else:
         print('file2 does not exist')
         exitMessage()
+
+
+def writeNewRowToCsv(newRow):
+    with open(sys.argv[3], 'a') as f:
+        writer = csv.writer(f)
+        writer.writerow(newRow)
 
 
 def writeHeader():
@@ -99,6 +103,7 @@ def writeHeader():
         # regular expression and write it to the header
         with open(sys.argv[2], 'r') as headerNames:
             csv_reader = csv.reader(headerNames)
+
             for headerName in csv_reader:
                 if headerName[1] == '':
                     headerNameList.append(headerName[0])
