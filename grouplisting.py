@@ -27,36 +27,37 @@ def exitMessage():
           '$2 = list_of_regular_expressions\n'
           '$3 = csv_file_where_to_store_data\n\n'
           'for example\n\n'
-          'python3 grouplisting.py example_list_of_urls.txt regex.csv data/grouptest.csv\n')
+          'python3 grouplisting.py example_list_of_urls.txt regex.csv data/saved_data.csv\n')
     sys.exit()
 
 
-class grouping(threading.Thread):
+class checkUrlList(threading.Thread):
 
     def __init__(self):
 
-        super(grouping, self).__init__()
+        super(checkUrlList, self).__init__()
 
     def run(self):
-
+        print('progressing...')
         if os.path.exists(sys.argv[1]):
-
             timeStamp = datetime.datetime.now()
 
             # open url file and check each line of urls and remove unnecessary spaces
             with open(sys.argv[1], 'r') as urlsFile:
+
                 for url in urlsFile:
+
                     newRow = [timeStamp, url.replace('\n', '')]
 
                     # open url and decode it to utf8 format
                     f = urlopen(url)
-                    bytes = f.read()
-                    urlText = bytes.decode("utf8")
+                    urlBytes = f.read()
+                    urlText = urlBytes.decode("utf8")
 
                     t = threading.Thread(target=checkRegExFromUrl, args=(urlText, newRow))
                     t.start()
         else:
-            print("file1 doesn't exist")
+            print('file1 does not exist')
 
 
 def checkRegExFromUrl(urlText, newRow):
@@ -81,14 +82,14 @@ def checkRegExFromUrl(urlText, newRow):
             writer.writerow(newRow)
 
     else:
-        print("file2 doesn't exist")
+        print('file2 does not exist')
         exitMessage()
 
 
 def writeHeader():
 
     if os.path.exists(sys.argv[3]):
-        print(sys.argv[3] + " exist")
+        print(sys.argv[3] + ' exist')
     else:
         # write date and Url to the header
         csvFile = open(sys.argv[3], 'w')
@@ -118,14 +119,14 @@ while True:
 
         writeHeader()
 
-        groupingThread = grouping()
-        groupingThread.start()
+        checkUrlListThread = checkUrlList()
+        checkUrlListThread.start()
 
         # Wait till all the threads are finished then pause a program. In this case every 15 seconds.
-        groupingThread.join()
+        checkUrlListThread.join()
 
-        print('next check is after 15 second\n'
-              'you can cancel operation for pressing Ctrl + C')
+        print('\nSearching is done and next check is starting after 15 second.\n'
+              'you can cancel the operation for pressing Ctrl + C')
         time.sleep(15)
 
         if quitProgram:
