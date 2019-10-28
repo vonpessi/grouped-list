@@ -20,11 +20,12 @@ and saved these on example_list_of_urls.txt. (example_list_of_urls.txt comes wit
 
 This is an example of my regex.csv file. First column indicate a regular expression pattern and second column indicate a name of that regular expression. for example in first row ```b.*ket,basket```where ```b.*ket``` is regular expression and ```basket``` is a name.
 ```
-b.*ket,basket
-com,com
-e.*ple,   < ------------- This one is without a name but there must be a comma after regular expression.
-net,net
-af.*on,esimerkkiColumnName
+
+vonpessi,pessi
+branch,branch
+e.*ple,< ------------- This one is without a name but there must be a comma after regular expression.
+systeemi,netti
+af.*on,esimerkki
 ```
 If the name of that regular expression are not set like in third row```e.*ple,   ```. It's going to use a regular expression itself as a name.
 
@@ -59,11 +60,10 @@ https://www.example.com/?action=branch&attack=animal
 ```
 and these regular expressions and names(check prerequisites step 2.):
 ```
-b.*ket,basket
-com,com
-e.*ple,  
-expression.
-net,net
+vonpessi,pessi
+branch,branch
+e.*ple,
+systeemi,netti
 af.*on,esimerkki
 ```
 
