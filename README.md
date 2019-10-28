@@ -50,13 +50,13 @@ For testing run:
 python3 grouplisting.py example_list_of_urls.txt regex.csv data/saved_data.csv
 ```
 ## How it works
-This script check url list line by line. On each url, script going through whole regular expression list and if regEx match the url then it gives a boolean True value and save all of the data to .csv file.
+This script check url list line by line. On each url it reads the content of url. Script going through whole regular expression list and if regEx match the content of url, then it gives a boolean True value and save all of the data to .csv file.
 
 for example:
 
 From this URL:
 ```
-https://www.example.com/?action=branch&attack=animal
+https://github.com/vonpessi/grouped-list/
 ```
 and these regular expressions and names(check prerequisites step 2.):
 ```
