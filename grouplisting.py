@@ -42,11 +42,11 @@ class checkUrlList(threading.Thread):
         if os.path.exists(sys.argv[1]):
             timeStamp = datetime.datetime.now()
 
-            # open url file and check each line of urls and remove unnecessary spaces
+            # open url file
             with open(sys.argv[1], 'r') as urlsFile:
 
                 for url in urlsFile:
-
+                    # add timestamp and url to the csv row.
                     newRow = [timeStamp, url.replace('\n', '')]
 
                     # open url and decode it to utf8 format
