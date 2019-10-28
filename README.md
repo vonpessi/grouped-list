@@ -9,7 +9,12 @@ git clone https://github.com/vonpessi/grouped-list.git
 All the necessary files comes with this repository for testing purpose.
 #### 1. List of URLs. 
 
-In this example I used a https://www.randomlists.com/ website to generate 100 random URLs and saved these on example_list_of_urls.txt. (example_list_of_urls.txt comes with this repository)
+In this example I used the following websites:
+```
+https://github.com/vonpessi/grouped-list
+https://www.python.org/
+```
+and saved these on example_list_of_urls.txt. (example_list_of_urls.txt comes with this repository)
 
 #### 2. Csv list of regular expressions and names.
 
@@ -64,7 +69,7 @@ af.*on,esimerkki
 
 There is a two first rows of this data/grouptest.csv file.
 
-|Date|Url|basket|com|e.*ple|net|esimerkki|
+əDate|Url|pessi|branch|e.*ple|netti|esimerkki|
 |---|---|---|---|---|---|---|
-|2019-10-27 16:21:33.827716|https://www.example.com/?action=branch&attack=animal|False|True|True|False|False|
+|2019-10-28 17:21:59.692304|https://github.com/vonpessi/grouped-list|True|True|True|False|True|
 
