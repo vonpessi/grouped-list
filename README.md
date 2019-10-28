@@ -69,7 +69,7 @@ af.*on,esimerkki
 
 There is a two first rows of this data/grouptest.csv file.
 
-əDate|Url|pessi|branch|e.*ple|netti|esimerkki|
+|Date|Url|pessi|branch|e.*ple|netti|esimerkki|
 |---|---|---|---|---|---|---|
 |2019-10-28 17:21:59.692304|https://github.com/vonpessi/grouped-list|True|True|True|False|True|
 
