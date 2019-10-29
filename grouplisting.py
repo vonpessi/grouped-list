@@ -10,10 +10,15 @@ from urllib.request import urlopen
 
 quitProgram = False
 
+# Limit the number of parallel threads
+semaphore = threading.Semaphore(5)
+threads = []
+
 
 # SIGINT handler
 def signalHandler(sig, frame):
     print('You pressed Ctrl+C')
+
     sys.exit(0)
 
 
@@ -38,6 +43,7 @@ class checkUrlList(threading.Thread):
         super(checkUrlList, self).__init__()
 
     def run(self):
+
         print('progressing...')
         if os.path.exists(sys.argv[1]):
             timeStamp = datetime.datetime.now()
@@ -54,13 +60,19 @@ class checkUrlList(threading.Thread):
                     urlBytes = f.read()
                     urlText = urlBytes.decode("utf8")
 
-                    t = threading.Thread(target=checkRegExFromUrl, args=(urlText, newRow))
-                    t.start()
+                    newThread = threading.Thread(target=checkRegExFromUrl, args=(urlText, newRow))
+
+                    threads.append(newThread)
+                    print(newThread)
+                    newThread.start()
+
+
         else:
             print('file1 does not exist')
 
 
 def checkRegExFromUrl(urlText, newRow):
+    semaphore.acquire()
 
     if os.path.exists(sys.argv[2]):
 
@@ -88,10 +100,11 @@ def writeNewRowToCsv(newRow):
     with open(sys.argv[3], 'a') as f:
         writer = csv.writer(f)
         writer.writerow(newRow)
+        time.sleep(1)
+        semaphore.release()
 
 
 def writeHeader():
-
     if os.path.exists(sys.argv[3]):
         print(sys.argv[3] + ' exist')
     else:
