@@ -1,7 +1,7 @@
 import os
 import re
-import time
 import signal
+import time
 import sys
 import threading
 import csv
@@ -17,8 +17,6 @@ threads = []
 
 # SIGINT handler
 def signalHandler(sig, frame):
-    print('You pressed Ctrl+C')
-
     sys.exit(0)
 
 
@@ -44,7 +42,10 @@ class checkUrlList(threading.Thread):
 
     def run(self):
 
-        print('progressing...')
+        print('you can cancel the process for pressing Ctrl + C.\n'
+              'progressing...'
+              'This might take a while...')
+
         if os.path.exists(sys.argv[1]):
             timeStamp = datetime.datetime.now()
 
@@ -63,7 +64,6 @@ class checkUrlList(threading.Thread):
                     newThread = threading.Thread(target=checkRegExFromUrl, args=(urlText, newRow))
 
                     threads.append(newThread)
-                    print(newThread)
                     newThread.start()
 
 
@@ -136,15 +136,23 @@ while True:
     else:
 
         writeHeader()
+        # Keyboard Interrupt
+        try:
+            checkUrlListThread = checkUrlList()
+            checkUrlListThread.daemon = True
+            checkUrlListThread.start()
+            checkUrlListThread.join()
 
-        checkUrlListThread = checkUrlList()
-        checkUrlListThread.start()
+            while checkUrlListThread.is_alive():
+                checkUrlListThread.join(1)
+        except (KeyboardInterrupt, SystemExit):
+            print('You shut down the process')
+            sys.exit(0)
 
         # Wait till all the threads are finished then pause a program. In this case every 15 seconds.
-        checkUrlListThread.join()
 
         print('\nSearching is done and next check is starting after 15 second.\n'
-              'you can cancel the operation for pressing Ctrl + C')
+              'you can cancel the process for pressing Ctrl + C')
         time.sleep(15)
 
         if quitProgram:
